@@ -1,0 +1,43 @@
+:root {
+    --main-bg: #121212;
+    --container-bg: #ffffff;
+    --text-color: #333333;
+    --navbar-color: #dc3545;
+    --navbar-text: white;
+}
+
+body {
+    background-color: var(--main-bg);
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+.navbar-custom {
+    background-color: var(--navbar-color) !important;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: var(--navbar-text) !important;
+}
+
+.navbar-custom .nav-link:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.container-custom {
+    background-color: var(--container-bg);
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 4rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: var(--main-bg);
+    color: var(--navbar-text);
+}
+
+.breadcrumb-custom {
+    background-color: var(--container-bg);
+}
