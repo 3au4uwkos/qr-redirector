@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\UrlForm;
 use app\services\QrService;
 use Yii;
 use yii\web\Controller;
@@ -23,21 +24,29 @@ class QrController extends Controller
         try {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-            $url = Yii::$app->request->post('url');
+            $model = new UrlForm();
 
-            $data = QrService::generate($url);
+            if ($model->load(Yii::$app->request->post())) {
+                $data = QrService::generate($model->url);
 
-            if ($data['ok'] == 0) {
-                return [
-                    'html' => $this->renderAjax('_success', [
-                        'qrCode' => $data['qr'],
-                        'shortUrl' => $data['short']
-                    ])
-                ];
+                if ($data['ok'] == 0) {
+                    return [
+                        'html' => $this->renderAjax('_success', [
+                            'qrCode' => $data['qr'],
+                            'shortUrl' => $data['short']
+                        ])
+                    ];
+                } else {
+                    return [
+                        'html' => $this->renderAjax('_error', [
+                            'message' => $data['message']
+                        ])
+                    ];
+                }
             } else {
                 return [
                     'html' => $this->renderAjax('_error', [
-                        'message' => $data['message']
+                        'message' => 'Не удалось получить данные формы'
                     ])
                 ];
             }

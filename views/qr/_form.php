@@ -13,6 +13,7 @@ $model = new UrlForm();
 $form = ActiveForm::begin([
     'id' => 'qr-form',
     'enableAjaxValidation' => false,
+    'enableClientValidation' => false,
     'options' => [
         'class' => 'form-horizontal',
         'data-pjax' => true
@@ -46,6 +47,7 @@ $form = ActiveForm::begin([
 
 <?php
 $this->registerJs(<<<JS
+$(document).off('submit', '#qr-form');
 $(document).on('submit', '#qr-form', function(e) {
     e.preventDefault();
     let form = $(this);

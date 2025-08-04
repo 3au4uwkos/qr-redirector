@@ -13,7 +13,7 @@ class UrlForm extends Model
         return [
             ['url', 'required'],
             ['url', 'url', 'defaultScheme' => 'https'],
-            ['url', 'string', 'max' => 255]
+            ['url', 'string']
         ];
     }
 
