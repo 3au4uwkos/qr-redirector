@@ -44,12 +44,12 @@ $config = [
             ],
         ],
         'db' => $db,
-//        'urlManager' => [
-//            'enablePrettyUrl' => true,
-//            'showScriptName' => false,
-//            'rules' => [
-//            ],
-//        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+            ],
+        ],
     ],
     'params' => $params,
     'timeZone' => 'Europe/Moscow',
