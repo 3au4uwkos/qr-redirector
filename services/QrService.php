@@ -2,7 +2,10 @@
 
 namespace app\services;
 
+use app\components\QrGenerator;
+use app\components\ShortCodeGenerator;
 use app\components\UrlValidator;
+use Yii;
 
 class QrService
 {
@@ -11,20 +14,16 @@ class QrService
         $validationResult = UrlValidator::process($url);
 
         switch ($validationResult) {
-            case 0: // Всё OK
-                return [
-                    'ok' => 0,
-                    'qr' => self::generateQrCode($url),
-                    'short' => self::generateShortCode()
-                ];
+            case 0:
+                return self::process($url);
 
-            case 1: // Невалидный URL
+            case 1:
                 return [
                     'ok' => 1,
                     'message' => 'Некорректный URL. Проверьте формат ссылки.'
                 ];
 
-            case 2: // URL недоступен
+            case 2:
                 return [
                     'ok' => 1,
                     'message' => 'URL недоступен. Проверьте работоспособность сайта.'
@@ -32,15 +31,21 @@ class QrService
         }
     }
 
-    private static function generateQrCode(string $url): string
+    private static function process(string $url): array
     {
-        // Здесь будет логика генерации QR-кода
-        return 'qr.png';
-    }
-
-    private static function generateShortCode(): string
-    {
-        // Здесь будет логика генерации короткой ссылки
-        return substr(md5(uniqid()), 0, 8);
+        try {
+            $qr_path = QrGenerator::generate($url);
+            $code = ShortCodeGenerator::generate($url);
+            return [
+                'ok' => 0,
+                'qr' => $qr_path,
+                'short' => $code,
+            ];
+        } catch (\Exception $exception) {
+            return [
+                'ok' => 1,
+                'message' => $exception->getMessage()
+            ];
+        }
     }
 }
