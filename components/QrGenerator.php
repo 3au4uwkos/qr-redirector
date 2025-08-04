@@ -10,8 +10,24 @@ use Endroid\QrCode\Writer\PngWriter;
 use yii\base\BaseObject;
 use Yii;
 
+/**
+ * Генератор QR-кодов
+ *
+ * Использует библиотеку Endroid/QrCode для создания PNG-изображений QR-кодов.
+ * Сохраняет сгенерированные коды в указанную директорию.
+ *
+ * @author      Matvei Zaitsev <3au4uwkos@gmail.com>
+ * @category    Components
+ * @package     app\components
+ */
 class QrGenerator extends BaseObject
 {
+    /**
+     * Генерирует QR-код для переданных данных
+     *
+     * @param string $data Данные для кодирования в QR-код
+     * @return string Относительный путь к файлу QR-кода
+     */
     public static function generate(string $data): string
     {
         $filename = Yii::$app->security->generateRandomString(32) . '.png';

@@ -3,10 +3,20 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%websites}}`.
+ * Создание таблицы для хранения веб-сайтов
+ *
+ * Содержит оригинальные URL, QR-коды и короткие ссылки.
+ * Включает счетчик использования и временные метки.
+ *
+ * @author      Matvei Zaitsev <3au4uwkos@gmail.com>
+ * @category    Migrations
+ * @package     app\migrations
  */
 class m250804_193906_create_websites_table extends Migration
 {
+    /**
+     * Создает таблицу websites
+     */
     public function safeUp()
     {
         $this->createTable('websites', [
@@ -22,6 +32,9 @@ class m250804_193906_create_websites_table extends Migration
         $this->createIndex('idx_short_code', 'websites', 'short_code', true);
     }
 
+    /**
+     * Удаляет таблицу websites
+     */
     public function safeDown()
     {
         $this->dropTable('websites');

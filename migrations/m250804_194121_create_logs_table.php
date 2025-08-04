@@ -3,17 +3,26 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%logs}}`.
+ * Создание таблицы логов перенаправлений
+ *
+ * Связывает веб-сайты и IP-адреса для учета переходов.
+ * Использует внешние ключи для обеспечения целостности данных.
+ *
+ * @author      Matvei Zaitsev <3au4uwkos@gmail.com>
+ * @category    Migrations
+ * @package     app\migrations
  */
 class m250804_194121_create_logs_table extends Migration
 {
+    /**
+     * Создает таблицу logs
+     */
     public function safeUp()
     {
-        // Создаём таблицу logs
         $this->createTable('logs', [
             'id' => $this->primaryKey(),
-            'website_id' => $this->integer()->notNull(),  // Ссылка на websites.id
-            'ip_id' => $this->integer()->notNull(),      // Ссылка на ips.id
+            'website_id' => $this->integer()->notNull(),
+            'ip_id' => $this->integer()->notNull(),
             'accessed_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP')
         ]);
 
@@ -38,6 +47,9 @@ class m250804_194121_create_logs_table extends Migration
         );
     }
 
+    /**
+     * Удаляет таблицу logs
+     */
     public function safeDown()
     {
         $this->dropTable('logs');

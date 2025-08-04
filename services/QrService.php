@@ -8,8 +8,29 @@ use app\components\UrlValidator;
 use app\models\Website;
 use Yii;
 
+/**
+ * Сервис для генерации QR-кодов и коротких ссылок
+ *
+ * Обрабатывает URL, валидирует их и генерирует QR-коды с короткими кодами.
+ * Использует внешние компоненты для генерации QR и коротких ссылок.
+ *
+ * @author      Matvei Zaitsev <3au4uwkos@gmail.com>
+ * @category    Services
+ * @package     app\services
+ *
+ * @see \app\models\Website
+ * @see \app\components\QrGenerator
+ * @see \app\components\ShortCodeGenerator
+ * @see \app\components\UrlValidator
+ */
 class QrService
 {
+    /**
+     * Основной метод для генерации QR-кода и короткой ссылки
+     *
+     * @param string $url URL для обработки
+     * @return array Результат операции с QR-кодом и короткой ссылкой или сообщение об ошибке
+     */
     public static function generate($url)
     {
         $validationResult = UrlValidator::process($url);
@@ -32,6 +53,13 @@ class QrService
         }
     }
 
+    /**
+     * Обрабатывает валидный URL и создает соответствующие записи
+     *
+     * @param string $url Валидный URL для обработки
+     * @return array Результат операции с QR-кодом и короткой ссылкой
+     * @throws \Exception Если не удалось сохранить данные
+     */
     private static function process(string $url): array
     {
         try {

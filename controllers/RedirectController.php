@@ -8,8 +8,29 @@ use app\services\LogService;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
+/**
+ * Контроллер редиректов по коротким ссылкам
+ *
+ * Обрабатывает переходы по коротким ссылкам, ведёт статистику
+ * переходов и перенаправляет на оригинальные URL.
+ *
+ * @author      Matvei Zaitsev <3au4uwkos@gmail.com>
+ * @category    Controllers
+ * @package     app\controllers
+ *
+ * @see \app\services\IpService
+ * @see \app\services\WebsiteService
+ * @see \app\services\LogService
+ */
 class RedirectController extends Controller
 {
+    /**
+     * Обрабатывает переход по короткой ссылке
+     *
+     * @param string $code Короткий код URL
+     * @return \yii\web\Response Перенаправление на оригинальный URL
+     * @throws NotFoundHttpException Если код не найден или произошла ошибка
+     */
     public function actionIndex($code)
     {
         try {
@@ -34,7 +55,9 @@ class RedirectController extends Controller
     }
 
     /**
-     * Получаем IP пользователя из заголовков
+     * Получает IP-адрес пользователя из запроса
+     *
+     * @return string IP-адрес или 'unknown', если не удалось определить
      */
     private function getUserIp(): string
     {

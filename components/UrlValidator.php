@@ -5,6 +5,16 @@ namespace app\components;
 use yii\base\Component;
 use yii\web\HttpException;
 
+/**
+ * Валидатор URL-адресов
+ *
+ * Проверяет корректность формата URL и его доступность.
+ * Использует стандартные PHP-функции для проверки.
+ *
+ * @author      Matvei Zaitsev <3au4uwkos@gmail.com>
+ * @category    Components
+ * @package     app\components
+ */
 class UrlValidator extends Component
 {
     /**

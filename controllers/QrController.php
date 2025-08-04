@@ -7,18 +7,45 @@ use app\services\QrService;
 use Yii;
 use yii\web\Controller;
 
+/**
+ * Контроллер для работы с QR-кодами
+ *
+ * Обрабатывает запросы на генерацию QR-кодов и коротких ссылок.
+ * Работает через AJAX-запросы без перезагрузки страницы.
+ *
+ * @author      Matvei Zaitsev <3au4uwkos@gmail.com>
+ * @category    Controllers
+ * @package     app\controllers
+ *
+ * @see \app\services\QrService
+ */
 class QrController extends Controller
 {
+    /**
+     * Главная страница генератора
+     *
+     * @return string HTML-код страницы
+     */
     public function actionIndex()
     {
         return $this->render('index');
     }
 
+    /**
+     * Возвращает HTML-форму для генерации (AJAX)
+     *
+     * @return string HTML-код формы
+     */
     public function actionGetForm()
     {
         return $this->renderAjax('_form');
     }
 
+    /**
+     * Обрабатывает запрос на генерацию QR-кода (AJAX)
+     *
+     * @return array JSON-ответ с результатом генерации
+     */
     public function actionGenerate()
     {
         try {
