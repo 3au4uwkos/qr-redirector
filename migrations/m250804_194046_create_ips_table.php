@@ -12,7 +12,7 @@ class m250804_194046_create_ips_table extends Migration
         $this->createTable('ips', [
             'id' => $this->primaryKey(),
             'ip' => $this->string(45),
-            'visit_count' => $this->integer()->defaultValue(1),
+            'visit_count' => $this->integer()->defaultValue(0),
             'last_visit' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP')
         ]);
 

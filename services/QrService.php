@@ -38,10 +38,6 @@ class QrService
             $website = Website::findOne(['url' => $url]);
 
             if ($website) {
-                $website->use_number++;
-                if (!$website->save()) {
-                    throw new \Exception('Не удалось сохранить данные в базу');
-                }
                 return [
                     'ok' => 0,
                     'qr' => Yii::getAlias(Yii::$app->params['qrCodes']['webPath']) . '/' . $website->name_of_qr_file,
@@ -56,7 +52,7 @@ class QrService
             $website->url = $url;
             $website->name_of_qr_file = $qr_filename;
             $website->short_code = $short_code;
-            $website->use_number = 1;
+            $website->use_number = 0;
 
             if (!$website->save()) {
                 throw new \Exception('Не удалось сохранить данные в базу');

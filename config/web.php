@@ -48,6 +48,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '<code:[a-zA-Z0-9]{8}>' => 'redirect/index',
             ],
         ],
     ],
