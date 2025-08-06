@@ -1,16 +1,24 @@
 <?php
-
+/**
+ * Partial view с формой для ввода URL
+ *
+ * Содержит форму с валидацией и обработкой через AJAX.
+ *
+ * @author      Matvei Zaitsev <3au4uwkos@gmail.com>
+ * @category    Views
+ * @package     app\views\qr
+ *
+ * @var yii\web\View $this
+ * @var app\models\UrlForm $model
+ */
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 use app\models\UrlForm;
 
-?>
-<?php
-/** @var UrlForm $model */
-
 $model = new UrlForm();
+?>
 
-$form = ActiveForm::begin([
+<?php $form = ActiveForm::begin([
     'id' => 'qr-form',
     'enableAjaxValidation' => false,
     'enableClientValidation' => false,

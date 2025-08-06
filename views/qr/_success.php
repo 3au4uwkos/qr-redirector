@@ -1,4 +1,17 @@
 <?php
+/**
+ * Partial view для отображения успешной генерации QR-кода
+ *
+ * Отображает сгенерированный QR-код и короткую ссылку с возможностью копирования.
+ *
+ * @author      Matvei Zaitsev <3au4uwkos@gmail.com>
+ * @category    Views
+ * @package     app\views\qr
+ *
+ * @var yii\web\View $this
+ * @var string $qrCode Путь к изображению QR-кода
+ * @var string $shortUrl Короткий код ссылки (без домена)
+ */
 use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
