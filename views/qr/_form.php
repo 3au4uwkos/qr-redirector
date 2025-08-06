@@ -52,7 +52,7 @@ $(document).on('submit', '#qr-form', function(e) {
     e.preventDefault();
     let form = $(this);
     $.ajax({
-        url: 'generate',
+        url: '/qr/generate',
         type: 'POST',
         data: form.serialize(),
         beforeSend: function() {

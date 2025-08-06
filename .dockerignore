@@ -1,0 +1,44 @@
+# Логи и временные файлы
+runtime/*
+!/runtime/.gitkeep
+web/assets/*
+!/web/assets/.gitkeep
+web/qr_codes/temp/*
+!/web/qr_codes/temp/.gitkeep
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Composer
+/vendor/
+composer.phar
+composer.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Тесты и dev-файлы
+tests/
+codeception.yml
+Vagrantfile
+yii.bat
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose.yml
+.docker/
+
+# Прочее
+.env
+.env.example
+.env.local
+README.md
+LICENSE.md
+.gitkeep

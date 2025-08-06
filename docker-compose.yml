@@ -1,9 +1,42 @@
-version: '2'
+version: '3.8'
+
 services:
   php:
-    image: yiisoftware/yii2-php:7.4-apache
+    image: yiisoftware/yii2-php:8.2-apache
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./:/app:delegated
+      - qr-storage:/app/web/qr_codes
     ports:
       - '8000:80'
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=qr_db
+      - DB_USER=qr_user
+      - DB_PASSWORD=qr_password
+    command: bash -c "chown -R www-data:www-data /app/web/qr_codes && php yii migrate --interactive=0 && docker-php-entrypoint apache2-foreground"
+
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=qr_db
+      - MYSQL_USER=qr_user
+      - MYSQL_PASSWORD=qr_password
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=root_password"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  mysql_data:
+  qr-storage:
